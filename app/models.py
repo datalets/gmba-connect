@@ -3,7 +3,6 @@
 
 from app import app, db
 
-
 resources_people = db.Table(
     'resources_people',
     db.Column('person_id', db.Integer(), db.ForeignKey('person.id')),

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from app import app, db, admin
+
 from .models import *
 from .formats import *
 from .convert import refresh_data
@@ -28,7 +29,7 @@ from tempfile import gettempdir
 UPLOAD_PATH = gettempdir()
 DATA_PATH = ospath.join(ospath.dirname(__file__), '..', 'data')
 
-# Add views
+# Administrative views
 class PersonView(ModelView):
     column_list = ('first_name', 'last_name', 'organisation')
 admin.add_view(PersonView(Person, db.session))
@@ -49,28 +50,7 @@ class ConfigurationView(BaseView):
 
 admin.add_view(ConfigurationView(name='Configuration', endpoint='config'))
 
-# API views
-@app.route("/api/people", methods=['GET'])
-def people_list():
-    return [p.dict() for p in Person.query.limit(10).all()]
-
-@app.route("/api/people/<int:people_id>", methods=['GET'])
-def people_detail(people_id):
-    person = Person.query.filter_by(id=people_id).first_or_404()
-    return {
-        'data': person.dict(),
-        'resources': [r.dict() for r in person.resources]
-    }
-
-@app.route("/api/resources", methods=['GET'])
-def resources_list():
-    return [r.dict() for r in Resource.query.limit(10).all()]
-
-@app.route("/api/ranges", methods=['GET'])
-def ranges_list():
-    return [r.dict() for r in Range.query.limit(10).all()]
-
-# Data upload
+# Data upload endpoint
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_data():
     if request.method == 'POST' and 'datafile' in request.files:
@@ -109,7 +89,7 @@ def upload_data():
         flash("Please select a valid file")
     return redirect(url_for('config.index'))
 
-# Data update
+# Data update endpoint
 @app.route('/refresh', methods=["POST"])
 def refresh_all():
     stats = []

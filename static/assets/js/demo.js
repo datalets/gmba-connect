@@ -3,20 +3,28 @@
 	$(function() {
 
 		$container = $('#content')
-		$.getJSON('/api/people', function(data) {
-			$.each(data, function() {
-				var fulltext = this.fullname + ' ' + this.organisation + ' ' + this.biography;
-				fulltext = fulltext.toLowerCase();
-				$container.append(
-					'<div class="person">' +
-					'<h4>' + this.fullname + '</h4>' +
-					'<span>' + this.organisation + '</span> &nbsp;' +
-					'<a class="c-button c-button--brand u-small" href="' + this.personal + '">Details</a>' +
-					'<hide>' + fulltext + '</hide>' +
-					'</div>'
-				);
-			});
-		}); //- getJSON
+		var runSearch = function(query) {
+			var filters = [{"name": "id", "op": "like", "val": "%y%"}];
+$.ajax({
+  data: {"filter[objects]": JSON.stringify(filters)},
+  headers: {
+    "Accept": JSONAPI_MIMETYPE
+  },
+			$.getJSON('/api/person', data, function(data) {
+				$.each(data, function() {
+					var fulltext = this.fullname + ' ' + this.organisation + ' ' + this.biography;
+					fulltext = fulltext.toLowerCase();
+					$container.append(
+						'<div class="person">' +
+						'<h4>' + this.fullname + '</h4>' +
+						'<span>' + this.organisation + '</span> &nbsp;' +
+						'<a class="c-button c-button--brand u-small" href="' + this.personal + '">Details</a>' +
+						'<hide>' + fulltext + '</hide>' +
+						'</div>'
+					);
+				});
+			}); //- getJSON
+		} //- runSearch
 
 		var delay = (function(){
 		  var timer = 0;
@@ -32,8 +40,7 @@
 
 				// console.log(q);
 				$('#help').hide();
-				$container.removeClass('hide').find('div').hide();
-				$container.find('div:contains("' + q + '")').show();
+				delay(runSearch(q));
 		});
 
 		$('#show-advanced').click(function() { $('#advanced').show() });
