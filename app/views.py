@@ -18,7 +18,7 @@ from flask import (
     send_from_directory,
 )
 
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 from sqlalchemy import or_
 
 import csv, json, time, traceback
