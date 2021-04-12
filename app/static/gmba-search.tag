@@ -441,15 +441,13 @@
       $('#block-warning').remove();
 
       /* Initialize map */
-			self.map = mymap = L.map('mymap').setView([51.505, -0.09], 2)
+			self.map = L.map('mymap').setView([51.505, -0.09], 2)
 
-			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-				maxZoom: 18,
-				attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-					'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-					'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-				id: 'mapbox.streets'
-			}).addTo(mymap)
+      // add the OpenStreetMap tiles
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+      }).addTo(self.map);
 
       var ranges_style = {
         "color": "#ff7800",
@@ -469,10 +467,10 @@
         style: ranges_style,
         onEachFeature: ranges_hover
       })
-			mountain_ranges.addTo(mymap)
+			mountain_ranges.addTo(self.map)
       mountain_ranges.on('click', function(e) {
         $('input[name="filter-range"]').val(e.layer.feature.properties.Name)
-        mymap.fitBounds(e.layer.getBounds());
+        self.map.fitBounds(e.layer.getBounds());
         self.runsearch()
       })
 

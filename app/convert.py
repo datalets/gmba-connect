@@ -66,7 +66,7 @@ def refresh_data(filename, fmt=None):
         app.logger.warn(msg)
         yield(msg, "error")
         return None
-    if fmt['extension'] is 'csv':
+    if fmt['extension'] == 'csv':
         totalrows = get_total_rows_csv(filename)
         with open(filename, 'rt', encoding='utf-8', errors='ignore') as csvfile:
 
@@ -153,7 +153,7 @@ def refresh_data(filename, fmt=None):
                         db.session.add(person)
                         count = count + 1
 
-    elif fmt['extension'] is 'geojson':
+    elif fmt['extension'] == 'geojson':
         ranges_missing = []
         with open(filename, 'rt', encoding='utf-8', errors='ignore') as jsonfile:
             jsondata = json.load(jsonfile)
