@@ -7,10 +7,10 @@ name = "pypi"
 
 [packages]
 flask-migrate = "*"
-flask-api = "*"
+flask-api = "<3"
 click = "*"
 gunicorn = "*"
-flask = "*"
+flask = "==1.1.4"
 flask-admin = "*"
 flask-sqlalchemy = "*"
 itsdangerous = "==1.1.0"
@@ -19,4 +19,3 @@ markupsafe = "*"
 werkzeug = "*"
 wtforms = "*"
 "psycopg2-binary" = "*"
-
