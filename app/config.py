@@ -4,7 +4,7 @@ Global Flask Application Setting
 set FLASK_CONFIG to 'development
  """
 
-import os
+import os, secrets
 from app import app
 from tempfile import gettempdir
 
@@ -31,6 +31,9 @@ class Config(object):
         SQLALCHEMY_DATABASE_URI = 'sqlite:///' + tf
 
     # Location of admin interface
-    ADMIN_PATH = os.getenv('ADMIN_PATH', 'admin')
+    secretadmin = 'admin'
+    if FLASK_ENV == 'production':
+        secretadmin = secrets.token_hex(10)
+    ADMIN_PATH = os.getenv('ADMIN_PATH', secretadmin)
 
 app.config.from_object('app.config.Config')
