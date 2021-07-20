@@ -46,6 +46,30 @@ Use a WSGI server like Gunicorn to host the app in production mode, e.g.:
 
 The `Procfile` in this project folder makes it ready for deployment to Heroku.
 
+We suggest using [supervisor](http://supervisord.org/) to run the project with a configuration as follows:
+
+```
+[program:gmba]
+user=gmbauser
+stdout_logfile=/opt/gmba-connect/stdout.log
+stderr_logfile=/opt/gmba-connect/stderr.log
+directory=/opt/gmba-connect
+
+environment=
+        HOME="/home/gmbauser",
+        FLASK_APP="app.py",
+        FLASK_CONFIG="production",
+        SECRET_KEY="abCd3f...",
+        SERVER_URL="https://...",
+        DATABASE_URL="postgres://...",
+        ADMIN_PATH="my-admin-path",
+        TIME_ZONE="Europe/Zurich"
+
+command=/home/gmbauser/.local/bin/pipenv run gunicorn --timeout 300 -w 4 -b 127.0.0.1:5141 app:app
+```
+
+Based on the above you can add an nginx proxy to port 5141.
+
 ## License
 
 MIT - details in [LICENSE](LICENSE) file.
