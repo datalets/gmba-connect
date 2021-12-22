@@ -27,7 +27,7 @@ migrate = Migrate(app, db)
 
 # Create admin
 adminlink = Config.ADMIN_PATH
-app.logger.info('Admin access at /%s' % adminlink)
+app.logger.info(print('Admin access: /%s' % adminlink))
 admin = admin.Admin(app, url='/'+adminlink, name='GMBA Connect', template_mode='bootstrap3')
 
 from .views import *
