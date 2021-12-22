@@ -85,6 +85,16 @@ button.maphome {
 .details .personal .org {
   font-weight: bold;
 }
+.details .personal .u-small {
+  text-decoration: none;
+  color: #00c;
+}
+.details .personal .u-small:hover {
+  color: #00f;
+}
+.details .personal .u-small i {
+  font-size: 110%;
+}
 
 .footer .material-icons,
 .details .material-icons { font-size: 0.8em; }
@@ -98,10 +108,10 @@ button.maphome {
   margin: 6px;
   box-shadow: 3px 3px 3px #eee;
 }
-.person-tags section span:hover {
+/* .person-tags section span:hover {
   border: 1px solid #ccc;
   box-shadow: none;
-}
+} */
 .person-tags section span i { font-size: 0px; color: transparent }
 
 /*
