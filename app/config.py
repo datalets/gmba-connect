@@ -1,7 +1,7 @@
 """
 Global Flask Application Setting
 
-set FLASK_CONFIG to 'development
+set FLASK_CONFIG to 'dev' for debugging
  """
 
 import os
@@ -22,7 +22,7 @@ class Config(object):
         SECRET_KEY = os.environ['SECRET_KEY']
 
     # database connection
-    SQLALCHEMY_ECHO = (FLASK_ENV == 'development')
+    SQLALCHEMY_ECHO = (FLASK_ENV == 'dev')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     if 'DATABASE_URL' in os.environ:
         SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
