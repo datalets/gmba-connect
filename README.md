@@ -24,13 +24,14 @@ To initialize and/or migrate the database, if necessary:
 
 To start the backend:
 
-    $ export FLASK_ENV="development"
-    $ export FLASK_DEBUG=1
-    $ python run.py
+    $ FLASK_ENV="dev" FLASK_DEBUG=1 python run.py
 
 The frontend interface will now be available.
 
 Check the log for the port and URL to the admin interface, which will be newly generated on every app start.
+
+Note: for development purposes an `offline.html` file loads un-minified JavaScript packages from the local server, not CDNs. 
+To use this, first install the packages using `yarn` from the root folder.
 
 ## Deployment
 
