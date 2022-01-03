@@ -24,9 +24,7 @@ To initialize and/or migrate the database, if necessary:
 
 To start the backend:
 
-    $ export FLASK_ENV="development"
-    $ export FLASK_DEBUG=1
-    $ python run.py
+    $ FLASK_ENV="dev" FLASK_DEBUG=1 python run.py
 
 The app will now be available, and you can access the backend administration at http://0.0.0.0:5000/admin/
 
@@ -37,6 +35,9 @@ In the backend you can manage all the data, as well as importing data exports in
 Check the log for the port and URL to the admin interface, which will by default in production be randomly generated on every app start. You can override this by setting the `ADMIN_PATH` environment variable.
 
 To update the mountain shapes, replace the `geodata/gmba.geojson` file.
+
+Note: for development purposes an `offline.html` file loads un-minified JavaScript packages from the local server, not CDNs. 
+To use this, first install the packages using `yarn` from the root folder.
 
 ## Deployment
 

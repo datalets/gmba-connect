@@ -167,11 +167,11 @@
         <p class="note hide">{ person.data.biography }</p>
         <p hide={ !person.data.personal_url }>
           <span each={ u in person.data.personal_urls }>
-            <a href={ u.trim() } target="_blank" class="c-button u-small c-button--info">
+            <a href={ u.trim() } target="_blank" class="u-small">
               <i class="material-icons">
                 language
               </i>
-              { getbaseurl(u) } ...</a>
+              { getbaseurl(u) }...</a>
           </span>
         </p>
       </div>
@@ -390,7 +390,7 @@
 
     getbaseurl(u) {
       return u.trim().replace('http://','').replace('https://','')
-              .replace('www.','').split('/')[0].substring(0,16)
+              .replace('www.','').split('/')[0].substring(0,23)
     }
 
     getpersonbyid(self, pid) {
